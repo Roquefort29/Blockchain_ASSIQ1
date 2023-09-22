@@ -3,7 +3,8 @@ import time
 
 
 class Transaction:
-    def __init__(self, sender, recipient, amount):
+    def __init__(self, desired_index, sender, recipient, amount):
+        self.index = desired_index
         self.sender = sender
         self.recipient = recipient
         self.amount = amount
@@ -11,7 +12,7 @@ class Transaction:
 
     def calculate_hash(self):
         try:
-            input_data = str(self.sender) + str(self.recipient) + str(self.amount)
+            input_data = str(self.index) + str(self.sender) + str(self.recipient) + str(self.amount)
             sha256 = hashlib.sha256()
             sha256.update(input_data.encode('utf-8'))
             return sha256.hexdigest()
@@ -53,8 +54,8 @@ class Blockchain:
 
 
 my_blockchain = Blockchain()
-transactions = [Transaction("Dana", "Dias", 10),
-                Transaction("Asel", "Syrym", 5), ]
+transactions = [Transaction(2, "Dana", "Dias", 10),
+                Transaction(1, "Asel", "Syrym", 5), ]
 
 new_block = Block(time.time(), transactions)
 my_blockchain.add_block(new_block)

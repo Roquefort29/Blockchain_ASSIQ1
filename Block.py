@@ -1,6 +1,5 @@
 import hashlib
 
-
 class Block:
     def __init__(self, index, previous_hash, transactions, merkle_root):
         self.index = index
@@ -70,4 +69,4 @@ for block in blockchain.chain:
     print(f"Block Index: {block.index}")
     print(f"Previous Hash: {block.previous_hash}")
     print(f"Merkle Root: {block.merkle_root}")
-    print(f"Block Hash: {block.hash}\n") 
+    print(f"Block Hash: {block.hash}\n")

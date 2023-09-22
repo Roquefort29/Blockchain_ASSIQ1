@@ -51,6 +51,8 @@ class BlockchainApp:
         print("Added new block.")
 
     def send_transaction(self):
+        print("Input index, which you want to add transaction:")
+        index = int(input())
         print("Input Sender:")
         sender = input()
         print("Input Recipient:")
@@ -58,17 +60,14 @@ class BlockchainApp:
         print("Input amount:")
         amount = float(input())
 
-        print("Input index, which you want to add transaction:")
-        desired_index = int(input())
+        transaction = Transaction(index, sender, recipient, amount)
 
-        transaction = Transaction(sender, recipient, amount)
-
-        if 0 <= desired_index <= len(self.blockchain.chain):
-            block = self.blockchain.chain[desired_index]
+        if 0 <= index <= len(self.blockchain.chain):
+            block = self.blockchain.chain[index]
             block.add_transaction(transaction)
             block.update_merkle_tree()
             block.recalculate_hash()
-            print(f"Transaction added to index {desired_index}")
+            print(f"Transaction added to index {index}")
         else:
             print("Block index does not exist.")
 
