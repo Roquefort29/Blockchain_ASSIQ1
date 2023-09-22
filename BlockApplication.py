@@ -1,7 +1,7 @@
 from BlockValidation import Blockchain
 from Block import Block
 from Transactions import Transaction
-
+import time
 
 class BlockchainApp:
     def __init__(self):
@@ -13,9 +13,7 @@ class BlockchainApp:
             print("1. Create new block")
             print("2. Send transaction")
             print("3. Show blockchain")
-            print("4. Check integrity of blockchain")
-            print("5. View Specific Block")
-            print("6. Exit")
+            print("4. Exit")
 
             choice = int(input())
 
@@ -26,10 +24,6 @@ class BlockchainApp:
             elif choice == 3:
                 self.view_blockchain()
             elif choice == 4:
-                self.check_blockchain_integrity()
-            elif choice == 5:
-                self.view_specific_block()
-            elif choice == 6:
                 print("Exit.")
                 break
             else:
@@ -42,10 +36,10 @@ class BlockchainApp:
         new_block = Block(
             self.blockchain.get_latest_block().index + 1,
             self.blockchain.get_latest_block().hash,
-            data,
+            data, int(time.time()),
             self.blockchain
         )
-        new_block.mine_block(4)
+        # new_block.mine_block(4)
 
         self.blockchain.add_block(new_block)
         print("Added new block.")
@@ -76,7 +70,7 @@ class BlockchainApp:
             print(f"Index: {block.index}")
             print(f"Previous Hash: {block.previous_hash}")
             print(f"Hash: {block.hash}")
-            print(f"Merkle Root: {block.calculate_merkle_root()}")
+            print(f"Merkle Root: {block.merkle_root()}")
             print(f"Timestamp: {block.timestamp}")
             print(f"Data: {block.data}")
             print(f"Nonce: {block.nonce}")

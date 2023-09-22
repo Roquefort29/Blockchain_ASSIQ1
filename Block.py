@@ -1,12 +1,16 @@
 import hashlib
+import time
+
 
 class Block:
-    def __init__(self, index, previous_hash, transactions, merkle_root):
+    def __init__(self, index, previous_hash, transactions, merkle_root, timestamp):
         self.index = index
         self.previous_hash = previous_hash
         self.transactions = transactions
         self.merkle_root = merkle_root
+        self.timestamp = timestamp
         self.hash = self.calculate_hash()
+        self.nonce = 0
 
     def calculate_hash(self):
         sha256 = hashlib.sha256()
@@ -22,6 +26,12 @@ class Blockchain:
 
     def add_block(self, block):
         self.chain.append(block)
+
+    def mine_block(self, block, difficulty=2):
+        while block.hash[:difficulty] != '0' * difficulty:
+            block.nonce += 1
+            block.hash = block.calculate_hash()
+            print(f"Block mined: {block.hash}")
 
     def get_latest_block(self):
         return self.chain[-1]
@@ -62,7 +72,7 @@ class MerkleTree:
 
 
 blockchain = Blockchain()
-genesis_block = Block(0, "0", [], "")
+genesis_block = Block(0, "0", [], "", int(time.time()))
 blockchain.add_block(genesis_block)
 
 for block in blockchain.chain:

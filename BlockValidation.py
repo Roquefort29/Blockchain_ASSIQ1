@@ -24,6 +24,9 @@ class Blockchain:
     def add_genesis_block(self):
         genesis_block = Block(0, "0", "Genesis Block")
         self.chain.append(genesis_block)
+    
+    def get_latest_block(self):
+        return self.chain[-1]
 
 
     def add_block(self, data):
