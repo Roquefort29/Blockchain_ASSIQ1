@@ -1,24 +1,27 @@
 import hashlib
+from Block import Block
 
 
-class Block:
-    def __init__(self, index, previous_hash, data):
-        self.index = index
-        self.previous_hash = previous_hash
-        self.data = data
-        self.nonce = 0
-        self.hash = self.calculate_hash()
+# class Block:
+#     def __init__(self, index, previous_hash, data):
+#         self.index = index
+#         self.previous_hash = previous_hash
+#         self.data = data
+#         self.nonce = 0
+#         self.hash = self.calculate_hash()
 
 
-    def calculate_hash(self):
-        data = str(self.index) + self.previous_hash + str(self.data) + str(self.nonce)
-        return hashlib.sha256(data.encode()).hexdigest()
+#     def calculate_hash(self):
+#         data = str(self.index) + self.previous_hash + str(self.data) + str(self.nonce)
+#         return hashlib.sha256(data.encode()).hexdigest()
 
 
-class Blockchain:
+class Blockchain():
     def __init__(self):
         self.chain = []
         self.add_genesis_block()
+        self.data = data
+        self.nonce = 0
 
 
     def add_genesis_block(self):
