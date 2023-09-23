@@ -1,5 +1,4 @@
-import hashlib
-import time
+
 from Block import Block
 from MerkleNodes import MerkleNodes
 
