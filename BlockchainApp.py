@@ -12,8 +12,7 @@ class BlockchainApp:
             print("2. Add transaction")
             print("3. Show blockchain")
             print("4. Chain validation")
-            print("5. Verify transaction")
-            print("6. Exit")
+            print("5. Exit")
 
             choice = input()
 
@@ -26,12 +25,10 @@ class BlockchainApp:
             elif choice == "4":
                 self.is_chain_valid()
             elif choice == "5":
-                self.verify_transaction()
-            elif choice == "6":
                 print("Exit.")
                 break
             else:
-                print("Wrong Input. Please, choose action from 1 to 6.")
+                print("Wrong Input. Please, choose action from 1 to 5.")
 
     def create_new_block(self):
         self.blockchain.add_block([])  # Create a new block with no transactions
@@ -49,20 +46,6 @@ class BlockchainApp:
 
     def view_blockchain(self):
        self.blockchain.view_blockchain()
-
-    def verify_transaction(self):
-        sender = input("Sender: ")
-        recipient = input("Recipient: ")
-        amount = float(input("Amount: "))
-        merkle_root = input("Merkle Root: ")
-
-        transaction = Transaction(sender, recipient, amount, merkle_root)
-        result = self.blockchain.verify_transaction(transaction)
-
-        if result:
-            print("Transaction is valid.")
-        else:
-            print("Transaction is not valid.")
 
     def is_chain_valid(self):
         print(self.blockchain.is_chain_valid())
